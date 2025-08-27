@@ -36,7 +36,7 @@ type vkJSON struct {
 	IC    [][]string `json:"IC"`
 }
 
-func parseProofData(pr types.ProofData) (proofPairingData, error) {
+func ParseProofData(pr types.ProofData) (proofPairingData, error) {
 	var (
 		p   proofPairingData
 		err error
@@ -59,7 +59,7 @@ func parseProofData(pr types.ProofData) (proofPairingData, error) {
 
 	return p, err
 }
-func parseVK(vkStr vkJSON) (*vk, error) {
+func ParseVK(vkStr vkJSON) (*vk, error) {
 	var v vk
 	var err error
 	v.Alpha, err = stringToG1(vkStr.Alpha)
