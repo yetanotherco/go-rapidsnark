@@ -20,7 +20,7 @@ func VerifyGroth16(zkProof types.ZKProof, verificationKey []byte) error {
 	}
 
 	// 2. cast external verification key data to internal model.
-	var vkStr vkJSON
+	var vkStr VkJSON
 	err = json.Unmarshal(verificationKey, &vkStr)
 	if err != nil {
 		return err
