@@ -14,18 +14,18 @@ import (
 func VerifyGroth16(zkProof types.ZKProof, verificationKey []byte) error {
 
 	// 1. cast external proof data to internal model.
-	p, err := parseProofData(*zkProof.Proof)
+	p, err := ParseProofData(*zkProof.Proof)
 	if err != nil {
 		return err
 	}
 
 	// 2. cast external verification key data to internal model.
-	var vkStr vkJSON
+	var vkStr VkJSON
 	err = json.Unmarshal(verificationKey, &vkStr)
 	if err != nil {
 		return err
 	}
-	vkKey, err := parseVK(vkStr)
+	vkKey, err := ParseVK(vkStr)
 	if err != nil {
 		return err
 	}
@@ -36,11 +36,11 @@ func VerifyGroth16(zkProof types.ZKProof, verificationKey []byte) error {
 		return err
 	}
 
-	return verify(vkKey, p, pubSignals)
+	return VerifyRaw(vkKey, p, pubSignals)
 }
 
 // verify performs the verification the Groth16 zkSNARK proofs
-func verify(vk *vk, proof proofPairingData, inputs []*big.Int) error {
+func VerifyRaw(vk *vk, proof proofPairingData, inputs []*big.Int) error {
 	if len(inputs)+1 != len(vk.IC) {
 		return fmt.Errorf("len(inputs)+1 != len(vk.IC)")
 	}

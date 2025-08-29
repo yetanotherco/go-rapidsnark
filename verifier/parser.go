@@ -28,7 +28,7 @@ type vk struct {
 }
 
 // vkJSON is the Verification Key data structure in string format (from json).
-type vkJSON struct {
+type VkJSON struct {
 	Alpha []string   `json:"vk_alpha_1"`
 	Beta  [][]string `json:"vk_beta_2"`
 	Gamma [][]string `json:"vk_gamma_2"`
@@ -36,7 +36,7 @@ type vkJSON struct {
 	IC    [][]string `json:"IC"`
 }
 
-func parseProofData(pr types.ProofData) (proofPairingData, error) {
+func ParseProofData(pr types.ProofData) (proofPairingData, error) {
 	var (
 		p   proofPairingData
 		err error
@@ -59,7 +59,7 @@ func parseProofData(pr types.ProofData) (proofPairingData, error) {
 
 	return p, err
 }
-func parseVK(vkStr vkJSON) (*vk, error) {
+func ParseVK(vkStr VkJSON) (*vk, error) {
 	var v vk
 	var err error
 	v.Alpha, err = stringToG1(vkStr.Alpha)
